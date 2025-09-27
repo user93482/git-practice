@@ -1,112 +1,270 @@
-# Practice with git and GitHub
+# Git és Github gyakorlás
 
-\[Your Step 3 Edit Here\]
+Ez egy egyszerű repo a git és a github gyakorlásához. A git egy **verziókezelő** eszköz. Ennek a segítségével bármilyen szöveges dokumentumot (jellemzően kódot) lehet követni, így visszatekintve látható, hogy hogyan változott. Ez egyszerűsíti az esetleges visszavonást, illetve a több szerző általi módosítások kezelését.
 
-This is a very simple repository for practicing with git and GitHub. git is a utility for *version control*. When a body of code is tracked with git, it is easy to see how the software has evolved over time, to roll back changes when needed, and to incorporate modifications by multiple collaborators. In this activity, we're going to focus on core git workflows for single-person projects. We may do a follow-up activity later in the quarter on workflows for collaborative projects. 
+A GitHub egy ingyenes online szolgáltatás, a git kiegészítésének tekinthető. Ennek segítségével a több szerző a munkáját egy közös helyre töltheti fel, illetve innen szerezhetik be a mások általi módosításokat, hogy összhangban dolgozhassanak.
 
-GitHub is a free online code hosting service that runs using git. We'll use git and GitHub to collaborate on code and to host the blogs on which you'll submit your homework. 
+## Előkészületek
 
-***Note***: if you are already comfortable using git from the command line, you can follow along with these instructions, replacing GitHub Desktop operations with the appropriate terminal commands. Both approaches are valid!! Phil personally prefers GitHub Desktop, but many prefer the command line instead. 
+Szükséged lesz a [GitHub](https://github.com/) fiókodra. Ha eddig nem tetted, regisztrálj.
 
-## Preparation
+Ezen kívül kelleni fog még egy git kliens. Ez lesz az a program, amit a számítógépeden lévő helyi fájlok verziókezelésére tudsz használni, illetve a github felülettel is ezen keresztül kommunikálhatsz.
+Bátrabbak kezdhetnek a [klasszikus (terminálos) gittel](https://git-scm.com/downloads), ahova különböző parancsokat beírva lehet dolgozni. Ehhez ssh kulcsot is érdemes beállítani, amiről [itt találsz leírást](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent), nyugodtan kérj segítséget, ha elakadtál.
+Létezik ezen kívül számos egyszerűsített felhasználói felület, ezekből is javaslunk néhányat: [GitHub Desktop](https://desktop.github.com/download), [GitKraken](https://www.gitkraken.com/download). 
+Ezeken kívül pedig a legtöbb fejlesztőkörnyezetben is van támogatás a legegyszerűbb git műveletek végrehajtására pár gombnyomással (bonyolultabb műveletek általában csak akkor kellenek, ha nagy baj van).
+Így ha rendelkezel például az [IntelliJ IDEA](https://www.jetbrains.com/idea/download) vagy [Visual Studio Code](https://code.visualstudio.com/Download) fejlesztőkörnyezettel, az ide beépítettet is használhatod.
 
-You should already have made an account on [GitHub](https://github.com/) and downloaded [GitHub Desktop](https://desktop.github.com/). 
+Ezek mindegyikével be kell jelentkezned a GitHub fiókodba, mielőtt annak tartalmát elérheted.
 
 ## 1. Fork
 
-*Forking* refers to the act of creating your personal copy of an existing body of code. You can then modify your *fork* as you wish. Forking is a great way to make use of templates and other resources upon which you can build. For example, you'll soon fork a template for your website, which you'll then populate and customize. 
+A *Forkolás* Az a művelet, melynek során egy már meglévő repóból készítesz magadnak egy saját változatot. Ezt utána úgy módosíthatod, ahogy szeretnéd. Most például a github weboldal jobb felső sarkában található "Fork" gombbal hozz létre egy másolatot saját magadnak, ezen tudsz majd dolgozni a későbbi feladatok során.
 
-Go ahead and fork this repo, using the "Fork" button at in the top-right corner. 
-
-Check out your fork! At the moment, it's just a copy of the [original repository](https://github.com/PIC16B/git-practice). 
+Válts is át a saját forkodra a böngészőben. Ez egyelőre egy tökéletes másolata annak a repónak, amit eddig olvastál. (Ha majd többen, közösen dolgozunk ugyanazon a projekten, akkor erre a lépésre nem lesz szükség, hiszen a cél pont az lesz, hogy mindenkinek a munkája egy helyre kerüljön. Ezt most csak azért csináltuk, hogy az alábbi gyakorlófeladatokat mindenki kipróbálhassa önállóan.)
 
 ## 2. Clone
 
-You now have a copy of this repository on GitHub. But how can you make changes? It's possible to manually edit files on GitHub, but this is not at all convenient. Instead, you should create a *local clone* of the repository. To do this, hit the big green button and choose Open in GitHub Desktop. Choose to create the repo in a location where you'll easily remember it. 
+Most, hogy már van egy saját másolatod ebből a repository-ból, változtatásokat is végezhetsz a tartalmán. Ehhez célszerű egy lokális másolatot létrehozni, így a számítógéped fájlrendszerén is szerepelni fognak a fájlok, nem csak a Github weboldalán. Ha GitHub Desktopot használsz, akkor a weboldalon, a fenti zöld gomra kattintva válaszd a "Megnyitás GitHub Desktopban" gombot.
 
-## 3. Edit a File
+```sh 
+git clone git@github.com:username/git-practice.git #a username-et cseréld a saját felhasználónevedre
+```
+## 3. Szerkesztés
 
-In your local clone of the repository, open this file (`README.md`). At the top of the file, underneath the title, type 
+Az imént létrehozott helyi fájlok közül keresd ki azt, amit épp olvasol (`README.md`), és ennek a fájlnak a tetejére írj valami üzenetet, például:
 
-> I'm \[your name\] and I edited this file! 
+> Én vagyok \[neved\], és módosítottam ezt a fájlt!
 
-## 4. Add and Commit
+## 4. Add és Commit
 
-Now go over to GitHub Desktop. Observe that the file `README.md` is now listed as changed. If there isn't already a blue checkmark beside the file, click the box to make one. 
+Mentsd el a módosításokat, és a git segítségével verziókezeld ezt. Először "add"-old a fájlt. Ezzel tudod megmondani a gitnek, hogy a következő elmentett verzióba ezt a fájlt szeretnéd beletenni.
 
-Then, add a *commit message* in the box below. The commit message should be a short description of what you achieved with your code modification. For example, a good commit message here might be "Add name to README.md." Once you've entered the commit message, click the big blue Commit button. 
+```sh
+git add README.md
+```
+vagy a GitHub Desktop-on jelöld ki a fájlt (ha nincs mellette kék pipa, kattints rá, hogy megjelenjen).
 
-## 5. Create a Folder and a File
+Ezt követően commit-olni fogjuk a változtatásokat, ez fogja létrehozni a tényleges mentési pontot, ami megjelenik a history-ban. Így a többiekkel megosztható, valamint később visszaállítható lesz. Ezt a következő paranccsal tehetjük:
+```sh
+git commit -m "Added introduction to README"
+```
+A -m utáni, idézőjelben található szöveg a commit üzenet. Egy rövid összefoglaló arról, hogy mi történt a változtatásban. Célszerű ide valami értelmeset írni, mert így könnyen visszakövethető, hogy mit is csináltunk egy-egy alkalommal.
 
-But wait -- let's do more. Make a new folder called `practice-folder` within the cloned repository. Then, create a Jupyter Notebook in this folder. Run the following code, obtaining a simple plot of a sine wave. 
+A GitHub Desktop esetén a képernyőn a bal alsó sarok környékén található szövegdobozba írhatod be ezt az üzenetet, majd a kék "Commit" gombra kattintva jön létre a commit. 
 
-```python
-from matplotlib import pyplot as plt
-import numpy as np
+## 5. Fájl létrehozása
 
-x = np.linspace(0, 2*np.pi, 1001)
-y = np.sin(x)
-f = plt.plot(x,y)
-``` 
+A helyi számítógépeden a `README.md` fájl mellett hozz létre egy mappát, ezt akárhogy nevezheted. Ezen belül hozz létre egy új fájlt `bevásárlólista.md` néven. A tartalma legyen ez:
 
-Make sure to save the resulting notebook. 
+```md
+# Bevásárlólista
+Ezek a dolgok amiket venni kellene.
 
-## 6. Add and Commit
+## Háztartási felszerelés
+- zsebkendő
+- mosogatószer
+- öblítő
+```
 
-Now, add (click the checkbox) beside your new notebook. Add an informative commit message, and commit the file. 
+## 6. Add és Commit
+Ahogy korábban is tetted, add-old (pipáld be) ezt a fájlt, írj egy üzenetet, és hozz létre egy új commitot.
 
 ## 7. Push
+A commit használatával a változtatásaid továbbra is csak a helyi számítógépeden léteznek. Ahhoz, hogy ezt mások is elérjék, *push*-olnod kell a módosításokat. Ezt egyszerűen a következő paranccsal teheted:
+```sh
+git push
+```
+GitHub Desktop esetén a jobb felső sarokban találhatsz egy fekete "Push" gombot. Ezen azt is láthatod, hogy hány commit fog ezzel felkerülni GitHubra.
 
-Great, we've made some local changes! Our primary remaining task is to *push* our code back to GitHub. This will allow us to share our code with others. Additionally, pushing code to GitHub is the recommended way to update your own website. 
+**Megjegyzés:** ezek szerint tehát akárhány commitot létrehozhatsz, és ezeket aztán tudod mind egyben pusholni. Nem gond, ha helyileg a kódodat félkész állapotban commit-olod.
+Nyugodtan hozz létre commitot, ha úgy gondolod, hogy a legutóbbi óta jelentősen haladtál. Arra viszont figyelj, hogy pusholáskor a kódod legyen helyes (nem kell tökéletesnek
+lennie, de ne hagyj benne hülyeségeket amik csak tesztelésre kellettek, vagy olyan hibákat, ami miatt nem indul el a program), mert ellenkező esetben megnehezíted a többiek dolgát.
 
-To push your code, just click the black "Push" button at the top right of GitHub Desktop. Before you click, you can notice that the button indicates the number of commits that you have made since your last push. After you click the button, you will have no more commits to push. 
-
-## 8. Inspect on GitHub
-
-Now go to the URL of your fork on GitHub and inspect the new `README.md` file. You can also take a look at the Jupyter Notebook you created. Note a nifty feature: by default, GitHub renders the Jupyter Notebook, so that you can see the plot you created. Your code is also shown in an attractive and readable format. 
+## 8. Megtekintés GitHubon
+Nyisd meg a GitHub-ot, és azon belül a repódat böngészőben (vagy ha ezt itt olvasod, akkor frissítsd az oldalt). Láthatod, hogy a `README`-ben valóban megjelent az új sor, illetve a
+bevásárlólista is feltöltésre került.
 
 ## 9. Pull
+Egy éles projektben jellemzően mások is commitolnak és pusholnak, szóval időnként az ő változtatásaikat célszerű lemásolni a helyi gépedre.
+Mivel ebben a repóban most egyedül dolgozol, ezt a módosítást is neked kell létrehoznod. Nyisd meg a repót a böngészőben, kattints fent a fájllistában a `bevásárlólista.md`-re,
+majd a jobb felső sarokban a ceruza ikonra. Egészítsd ki a fájlt, hogy így nézzen ki:
 
-What if there's a change made on GitHub that's not present in your local repository? This is a common situation when collaborating. Your partner made some cool improvement to the code that you would like to access. To do this, you need to *pull*. 
+```md
+# Bevásárlólista
+Ezek a dolgok amiket venni kellene.
 
-To practice pulling, we need to make a change on GitHub. For now, just edit the `README.md` file again, which you can do by navigating to this file and clicking the pencil icon. Add another sentence to the top of the file. Here's a good one:
+## Háztartási felszerelés
+- zsebkendő
+- mosogatószer
+- öblítő
 
-> I'm \[your name\] and I edited this file online! 
+## Melegszendvicshez
+- kenyér
+- felvágott
+- margarin
+- sajt
+```
 
-At the bottom of the editing screen, you'll be asked to commit the result. Make sure to add a useful commit message. 
+Most ezt a távoli módosítást szeretnénk eljuttatni a helyi fájljainkhoz. Ezt a következő paranccsal tehetjük:
+```sh
+git pull
+```
+GitHub Desktop esetén a korábbi "Push" gomb felirata "Fetch" vagy "Pull" feliratra váltott. Ha a felirat "Fetch", nyomd meg, és várj, amíg "Pull"-ra vált.
+Nyomd meg a "Pull" gombot. (A `git fetch` is egy létező parancs, erről most részletesebben nem lesz sző).
 
-Ok, let's incorporate this change into our local repository. In GitHub Desktop, the button that used to say "Push" should now say either "Fetch" or "Pull" with an indicator of how many commits there are to be pulled. If it says "Fetch," you should click it once and wait for it to say "Pull." Once it says "Pull," click it again and wait a few moments for the pull to complete. 
+Ha sikerült pullolni, akkor nézd meg a bevásárlólistát a helyi fájlrendszereden. Most már a melegszendvics alapanyagoknak is meg kellene benne jelennie.
+(Lehetséges, hogy be kell zárnod, majd újra kell nyitnod a fájlt a szövegszerkesztőben.)
 
-Finally, check the `README.md` file on your local machine. The change that you made online should now be reflected in your local file as well. 
+## 10. Conflict
 
-## 10. Discard and Revert
+Sajnos elkerülhetetlen, hogy a fejlesztők időnként ugyanabban a fájlban, ugyanazokon a sorokon dolgozzanak.
+Ha létrejön két commit amelyekről a git nem tudja ügyesen eldönteni, hogy hogyan kezelje a hasonló helyen
+történő változtatásokat, akkor egy konfliktus keletkezik, melyet kézzel kell feloldanunk.
+Célszerű minél gyakrabban szinkronizálnunk a kódunkat egymással (gyakori push és pull), mert
+így csökkenthetjük az ilyen konfliktusok számát és bonyolultságát. A következőekben létre fogunk hozni egy
+ilyen konfliktust, majd megjavítjuk.
 
-One huge advantage of working with a version control system like git is that you can easily undo mistakes by going back to the last "good" version of your project. There are multiple ways of doing this. We'll focus on two. 
+A helyi számítógépen adj hozzá egy új elemet a melegszendvics alapanyagokhoz a lista végére. Az eredmény így nézzen ki:
 
-### 10.1 If You Haven't Committed Yet: Discard
+```md
+# Bevásárlólista
+Ezek a dolgok amiket venni kellene.
 
-So, you were making a small tweak to your file and accidentally broke the amazing function that you were working on. It happens! If you catch this before you commit your changes, then fixing it is easy -- all you need to do is *discard* your changes. 
+## Háztartási felszerelés
+- zsebkendő
+- mosogatószer
+- öblítő
 
-In that Jupyter notebook you created in Step 5, delete the line `import numpy as np`. Now your notebook won't correctly generate the plot (after resetting the kernel). Whoops! Pretend that you didn't notice, and save the notebook. 
+## Melegszendvicshez
+- kenyér
+- felvágott
+- margarin
+- sajt
+- ketchup
+```
 
-Over in GitHub Desktop, notice that there is a change recorded to that file. Right-click on the change and choose "Discard Changes." Check your notebook again. You should observe that the line `import numpy as np` is back where it belongs. Great!
+Mentsd és commitold a változtatást **de ne pushold!**
 
-### 10.2 If You Committed Your Mistake: Revert
 
-Sometimes, we don't catch a mistake until after we've already committed it. If we're unlucky, we may even have created other commits since our mistake. In these cases, the first step is to identify on which commit the error was introduced. This requires careful debugging and attention to detail. One approach is to *go back* to a previous commit on which you know your code was working, and then step through the changes you made. To do this, we use the *revert* command. 
+Ismét a **Github felületén** kell szerkeszted a bevásárlólistát. Egészítsd ki a fájlt, hogy így nézzen ki:
 
-Go back to your Jupyter Notebook, and delete `import numpy as np` again. This time, commit the change, with commit message "remove numpy import." Oops! Now our committed code is broken. 
+```md
+# Bevásárlólista
+Ezek a dolgok amiket venni kellene.
 
-To *revert* the commit, navigate over to the History tab of GitHub Desktop. Right-click the commit with the message "remove numpy import," and choose "Revert Changes in Commit." This will have the effect of creating a *new* commit that undoes the changes in your erroneous commit. This will work even if you've made other commits since the bad one; only the changes from the bad commit will be reverted. 
+## Háztartási felszerelés
+- zsebkendő
+- mosogatószer
+- öblítő
 
-***Note***: GitHub Desktop doesn't gave an option corresponding to `git reset`, but if you are comfortable in the terminal and familiar with this command, you can also use `git reset` to accomplish a similar task, albeit with different consequences for your commit history.
+## Melegszendvicshez
+- kenyér
+- felvágott
+- margarin
+- sajt
+- majonéz
+```
+(Mivel közvetlenül a weben szerkesztetted a fájlt,
+ez automatikusan egy "push" is volt, azt nem kell külön megcsinálnod.)
 
-### 11. No Duplicate Files! 
+Ezt követően **válts vissza a lokális git repository-ra**, és próbáld meg pusholni a helyi (ketchupos) módosítást.
+Észreveheted, hogy ez nem sikerült, hiszen a Githubra felkerült egy commit, ami beelőzte a helyi módosítást.
+Ahhoz, hogy ezt megoldd, pullolnod kell a távoli commitokat.
 
-An important principle of version control is that you **never** duplicate files. Rather than having `first_draft.ipynb`, `final_version.ipynb`, `final_version_REAL.ipynb`, you should instead commit your code at each stage (or even more frequently). You'll always be able to go back and find the earlier versions in the commit history. 
+A `git pull` is sikertelen, mert már van egy helyi commitod, amit a git nem ír felül a távolival (mert akkor elveszne a munkád).
 
-## More to Learn
+A pullolj a `git pull --rebase` paranccsal! Ez a helyi változtatásaid előtt végrehajtja az összes távoli commitot.
+Itt kerül elő a konfliktus: mindkét helyen ugyanaz a sor módosult, a git nem tudja eldönteni, hogy mit kell tenni.
+(Tényleges kód esetén lehet, hogy csak az egyik sor kell, mert ugyanazt a problémát próbálják megoldani. Lehet, hogy mindkét módosítás kell,
+és ilyenkor van, hogy nem mindegy a sorrend.)
 
-Great job! If you comfortably navigated these exercises, then you have the necessary basics for working with git and GitHub. These will get you most of the way through the course, and indeed, through your programming career. The most important topics that we haven't yet discussed are *merging* and *branching*, which are especially relevant when collaborating with others. We may come back to these in a future Discussion activity. 
+Nyisd meg a helyi fájlt, valahogy így kell kinéznie:
 
-Another topic that you might find useful to explore on your own is the `.gitignore` file. This file specifies files which should be *excluded* from tracking by git. This is handy if there are certain "junk" files that you would prefer not to see in GitHub Desktop. 
+```md
+# Bevásárlólista
+Ezek a dolgok amiket venni kellene.
+
+## Háztartási felszerelés
+- zsebkendő
+- mosogatószer
+- öblítő
+
+## Melegszendvicshez
+- kenyér
+- felvágott
+- margarin
+- sajt
+<<<<<<< HEAD
+- majonéz
+=======
+- ketchup
+>>>>>>> af3239a (commit üzenet)
+```
+
+Az elválasztó sorok megmutatják, hogy mik a helyi, és mik a távoli változtatások,
+illetve hogy a távoliak melyik commitban kerültek be (ez akkor releváns, ha több távoli commit van).
+
+Ennek a feloldásához el kell döntened, hogy a változtatások közül melyik(ek) kell(enek).
+Ha mindkettőt meg szeretnéd tartani, egyszerűen töröld az elválasztó sorokat.
+Ha csak az egyik commit tartalmát szeretnéd megtartani, értelemszerűen az elválasztók mellett
+a nem kívánatos sort is töröld (ezt nyilván "éles" helyzetben, kódban nem mindig egyszerű eldönteni.
+Segítséget kérni mindig ér!)
+
+Ha végeztél a konfliktus feloldásával, akkor addold a fájlt. (Jelenleg egy rebase közben vagyunk, itt
+az add azt jelöli, hogy a fájlban sikerült feloldani a konfliktust.)
+
+A konfliktus feloldása után a `git rebase --continue` parancs kiadásával jelezheted, hogy folytatódhat
+a rebase. Ezt követően a pull sikeresen véget ér, pusholhatod a commit-odat. Ezt követően megnézheted,
+hogy valóban mindkét commit be került-e a verziótörténetbe, és a megfelelő módon oldódott-e fel a konfliktus.
+
+## 11. Branch & Pull request
+
+A git használata során jellemzően szeretünk különböző ágakon (branch) dolgozni. Ezzel egy helyen tarthatjuk
+az összefüggő váltzotatásokat, amiket így könnyen tudunk egyben átnézni, visszavonni, valamint a conflict-ok
+számát is minimalizálhatjuk.
+
+Hozz létre egy új branch-et, amiben egy titkos alapanyagot fogunk hozzáadni a melegszendvicshez.
+```bash
+git branch secret-ingredient
+```
+Ezt követően válts is át az új branch-re.
+```bash
+git checkout secret-ingredient
+```
+Ezt követően szerkeszdd a `README.md` fájl ezt követő bekezdését, írd bele a titkos alapanyagot! valahogy így nézzen ki:
+```md
+A következő feladatod, hogy a `bevásárlólista.md`-be is írd bele a juhtúrót.
+Ezt is mentsd és commitold, így mindkét helyre bekerült az új alapanyag.
+
+```
+Ha végeztél, commitolj.
+
+A következő feladatod, hogy a `bevásárlólista.md`-be is írd bele a <titkos alapanyag>ot
+a melegszendvics hozzávalók alá.
+Ezt is mentsd és commitold, így mindkét helyre bekerült az új alapanyag.
+
+A változtatásaidat mindeddig az újonnan létrehozott ágon csináltad. Ezeket a módosításokat időnként célszerű
+visszavezetni a fő ágra is (pl. ha egy nagyobb jól elkülönülő feladat, munkafolyamat végére értél.) Ezt éles
+projekten nem szoktuk "csak úgy" megtennni, hanem jellemzően egy kérést intézünk másokhoz, hogy hagyják jóvá
+a változtatásokat mielőtt azok a fő ágra kerülhetnek. Most ezt fogjuk kipróbálni.
+
+Push-old a kódod, a korábbiakhoz hasonlóan. Mivel a GitHubon még nem létezik a branch, amire commit-okat szeretnél
+tenni, hibába ütközhetsz. Terminálban a kövekező parancsot használhatod:
+```bash
+git push --set-upsream origin secret-ingredient
+```
+Így a GitHubon is létrejön a branch, majd rákerülnek a commitjaid.
+
+Végül a GitHub felületén az oldal frissítése után találhatsz egy figyelmeztetést, hogy
+egy új branch-re commitok kerültek. Ebben a "compare & pull request"-re kattintva nyithatsz pull
+requestet. Ha a figyelmeztetés nem jelenne meg, akkor felül a "Pull requests" tabra váltva is
+nyithatsz pull requestet. 
+
+Mivel egy forkon dolgozol, lehetséges, hogy választanod kell, hogy melyik repositoryól
+melyikbe szeretnéd a változtatásokat átvezetni. (Erre éles projektben általában nem lesz szükség).
+Mindkettő a sajátod legyen (`<username>/git-practice`).
+Ezután meg kell adnod, hogy melyik branchről melyikre szeretnéd átmásolni
+a módosításokat. Itt a `base` a `main` legyen, erre kerülnek majd a módosítások.
+A `compare` a `secret-ingredient` legyen, ez lesz az a branch, amiről a változtások
+át lesznek másolva. Ennek adhatsz nevet és leírást,j illetve a jobb oldali panelen
+megkérhetsz embereket, hogy "review"-olják a változtatásokat.
