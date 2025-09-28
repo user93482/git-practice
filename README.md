@@ -1,3 +1,4 @@
+Meg lett változtatva
 # Git és Github gyakorlás
 
 Ez egy egyszerű repo a git és a github gyakorlásához. A git egy **verziókezelő** eszköz. Ennek a segítségével bármilyen szöveges dokumentumot (jellemzően kódot) lehet követni, így visszatekintve látható, hogy hogyan változott. Ez egyszerűsíti az esetleges visszavonást, illetve a több szerző általi módosítások kezelését.
